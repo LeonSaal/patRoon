@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2016-2024 Rick Helmus <r.helmus@uva.nl>
+#
+# SPDX-License-Identifier: GPL-3.0-only
+
 makeDBIDsUnique <- function(records)
 {
     if (anyDuplicated(records$DB_ID))
@@ -86,7 +90,7 @@ sanitizeMSLibrary <- function(lib, prefCalcChemProps, neutralChemProps, potAdduc
                                     neutralChemProps = neutralChemProps)
     
     # normalize polarity: ensure uppercase, sometimes shortened as P/N
-    lib$records[, Ion_mode := toupper("POSITIVE")]
+    lib$records[, Ion_mode := toupper(Ion_mode)]
     lib$records[Ion_mode == "P", Ion_mode := "POSITIVE"]
     lib$records[Ion_mode == "N", Ion_mode := "NEGATIVE"]
     

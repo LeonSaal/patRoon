@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2016-2024 Rick Helmus <r.helmus@uva.nl>
+#
+# SPDX-License-Identifier: GPL-3.0-only
+
 #' @include main.R
 #' @include compounds.R
 #' @include workflow-step-set.R
@@ -39,6 +43,8 @@ setMethod("updateSetConsensus", "compoundsSet", function(obj)
     
     return(obj)
 })
+
+setMethod("getFragInfo", "compoundsSet", doFeatAnnGetFragInfoSets)
 
 setMethod("mergedConsensusNames", "compoundsSet", doFeatAnnMCNSets)
 setMethod("mergedConsensusNames", "compoundsConsensusSet", doFeatAnnMCNSetsCons)
@@ -293,7 +299,6 @@ generateCompoundsSet <- function(fGroupsSet, MSPeakListsSet, adduct, generator, 
     
     setObjects <- Map(unsetFGroupsList, msplArgs, setArgs,
                       f = function(fg, mspl, sa) do.call(generator, c(list(fGroups = fg, MSPeakLists = mspl[[1]], adduct = NULL, ...), sa)))
-    setObjects <- initSetFragInfos(setObjects, MSPeakListsSet)
 
     cons <- makeFeatAnnSetConsensus(setObjects, names(fGroupsSet), setThreshold, setThresholdAnn, setAvgSpecificScores,
                                     NULL)

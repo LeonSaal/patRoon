@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2016-2024 Rick Helmus <r.helmus@uva.nl>
+#
+# SPDX-License-Identifier: GPL-3.0-only
+
 #' @include main.R
 #' @include formulas.R
 #' @include workflow-step-set.R
@@ -36,6 +40,13 @@ setMethod("updateSetConsensus", "formulasSet", function(obj)
     obj@featureFormulas <- pruneList(lapply(obj@featureFormulas, function(ff) pruneList(ff[groupNames(obj)])), TRUE)
     
     return(obj)
+})
+
+setMethod("getFragInfo", "formulasSet", function(obj, groupName, index, analysis = NULL)
+{
+    if (!is.null(analysis))
+        return(callNextMethod())
+    return(doFeatAnnGetFragInfoSets(obj, groupName, index))
 })
 
 setMethod("mergedConsensusNames", "formulasSet", doFeatAnnMCNSets)
@@ -258,7 +269,6 @@ generateFormulasSet <- function(fGroupsSet, MSPeakListsSet, adduct, generator, .
     
     setObjects <- Map(unsetFGroupsList, msplArgs, setArgs,
                       f = function(fg, mspl, sa) do.call(generator, c(list(fGroups = fg, MSPeakLists = mspl[[1]], adduct = NULL, ...), sa)))
-    setObjects <- initSetFragInfos(setObjects, MSPeakListsSet)
     
     combFormulas <- Reduce(modifyList, lapply(setObjects, annotations, features = TRUE))
     
