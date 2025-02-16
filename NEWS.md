@@ -4,6 +4,7 @@
 * Speed up 'unsetting' of large formulas/compounds objects, which affects eg plotting TP similarities, annotatedPeakList() etc (reported by Alessia Ore)
 * `report()`: correctly handle removed suspect hits while reporting TP similarities (reported by Alessia Ore)
 * Added visual clue to `checkFeatures()` and `checkComponents()` to see whether a feature or component is marked to be removed (pull request #117 as suggested by Leon Saal)
+* Changed cache for filtering of feature groups to reduce cache size (#98)
 
 
 # patRoon 2.3.3
