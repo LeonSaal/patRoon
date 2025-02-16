@@ -4,7 +4,12 @@
 * Speed up 'unsetting' of large formulas/compounds objects, which affects eg plotting TP similarities, annotatedPeakList() etc (reported by Alessia Ore)
 * `report()`: correctly handle removed suspect hits while reporting TP similarities (reported by Alessia Ore)
 * Added visual clue to `checkFeatures()` and `checkComponents()` to see whether a feature or component is marked to be removed (pull request #117 as suggested by Leon Saal)
-* Changed cache for filtering of feature groups to reduce cache size (#98)
+* `loadMSLibrary()`: don't always set `Ion_mode` of records to positive and guess missing `Ion_mode` data (issue #119)
+* Fixed: `generateFormulasGenForm()` `topMost` was not considered for cached results
+* Small doc updates for `MSPeakLists`
+* Fixed: the score filters for the `filter()` method of formulas/compounds could in rare cases not be applied correctly for consensus and/or sets results
+* MSP MS libraries: don't be case sensitive when checking the "Num Peaks" field (Bas van de Velde)
+* Small fixes in example code from the Handbook (reported by Boris Droz and Jan Specker)
 
 
 # patRoon 2.3.3
